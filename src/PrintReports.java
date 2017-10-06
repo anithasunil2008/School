@@ -107,8 +107,8 @@ public class PrintReports {
         System.out.println("\n-----------------------------------------\n");
         for (int i = 0; i < classRoomList.size(); i++)
             for (Classroom classroom : classRoomList.get(i).getClassroom()) {
-                System.out.println("Room No = " + classroom.display());
-                System.out.println("Teacher Info:");
+                //System.out.println("Room No = " + classroom.display());
+                //System.out.println("Teacher Info:");
                 String teacherInfo = classroom.getTeacher().display();
             }
 
