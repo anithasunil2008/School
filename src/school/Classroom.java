@@ -1,5 +1,7 @@
 package school;
+
 import util.*;
+
 import java.lang.String;
 import java.util.ArrayList;
 
@@ -10,42 +12,39 @@ public class Classroom extends Person implements Displayable {
     private ArrayList<Displayable> studentList;
 
 
-    public void setRoomNumber(int roomNumber){
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 
-    public int getroomNumber(){
+    public int getroomNumber() {
         return roomNumber;
     }
 
     public void setTeacher(Displayable teacher) {
-        this.teacher=teacher;
+        this.teacher = teacher;
     }
 
     public Displayable getTeacher() {
         return this.teacher;
     }
 
-    public void setStudents(ArrayList<Displayable> s) {
-        this.studentList = s;
-    }
+    public void setStudents(ArrayList<Displayable> studentList) { this.studentList = studentList; }
 
-    public ArrayList<Displayable> getStudents() {
-        return this.studentList ;
-    }
+    public ArrayList<Displayable> getStudents() { return this.studentList; }
 
     public Classroom(int roomNumber) {
-        this.roomNumber =roomNumber;
+        this.roomNumber = roomNumber;
     }
 
-    public Classroom(int roomNumber, Displayable teacher, ArrayList<Displayable> students){
+    public Classroom(int roomNumber, Displayable teacher, ArrayList<Displayable> studentList) {
         setRoomNumber(roomNumber);
         setTeacher(teacher);
-        setStudents((ArrayList<Displayable>) students);
+        setStudents((ArrayList<Displayable>) studentList);
     }
 
+
     @Override
-    public String display(){
+    public String display() {
         return "Room Number: " + roomNumber;
 
     }

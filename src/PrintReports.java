@@ -57,7 +57,6 @@ public class PrintReports {
         } while (studentEntryPrompt.equals("yes") || studentEntryPrompt.equals("YES") || studentEntryPrompt.equals("Y") || studentEntryPrompt.equals("y") || studentEntryPrompt.equals("Yes"));
 
         Classroom classRoom = new Classroom(roomNumber, teacher, stuList);
-        stuList.clear();
 
         return classRoom;
     }
@@ -108,15 +107,15 @@ public class PrintReports {
         for (int i = 0; i < classRoomList.size(); i++){
             Classroom cr = (Classroom) classRoomList.get(i);
             //Print room number
-            cr.display();
+            System.out.println(cr.display());
             //Print teacher details
-            cr.getTeacher().display();
+            System.out.println("Teacher Details : " + cr.getTeacher().display());
             //Print student details
             for (int j = 0; j< cr.getStudents().size(); j++) {
                 Student stu = (Student) cr.getStudents().get(j);
-                stu.display();
+                System.out.println(stu.display());
             }
-        }1
+        }
         System.out.println("\n-----------------------------------------\n");
     }
 }
