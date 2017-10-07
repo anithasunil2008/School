@@ -7,7 +7,7 @@ public class Classroom extends Person implements Displayable {
 
     private int roomNumber;
     private Displayable teacher;
-    private ArrayList<Displayable> students;
+    private ArrayList<Displayable> studentList;
 
 
     public void setRoomNumber(int roomNumber){
@@ -27,18 +27,18 @@ public class Classroom extends Person implements Displayable {
     }
 
     public void setStudents(ArrayList<Displayable> s) {
-        this.students= students;
+        this.studentList = s;
     }
 
-    public ArrayList<Displayable> getStudents(ArrayList<Displayable> s) {
-        return this.students ;
+    public ArrayList<Displayable> getStudents() {
+        return this.studentList ;
     }
 
     public Classroom(int roomNumber) {
         this.roomNumber =roomNumber;
     }
 
-    public Classroom(int roomNumber, Displayable teacher, Displayable students){
+    public Classroom(int roomNumber, Displayable teacher, ArrayList<Displayable> students){
         setRoomNumber(roomNumber);
         setTeacher(teacher);
         setStudents((ArrayList<Displayable>) students);

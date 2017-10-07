@@ -3,18 +3,16 @@ import util.*;
 import school.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PrintReports {
     String print;
-    String msg1;
+    String studentEntryPrompt;
     Student s;
     Teacher t;
     int roomNumber;
 
-    Classroom c;
-
     ArrayList<Displayable> crList = new ArrayList<Displayable>();
-    //ArrayList<Displayable> tecList = new ArrayList<Displayable>();
     ArrayList<Displayable> stuList = new ArrayList<Displayable>();
 
 
@@ -26,14 +24,15 @@ public class PrintReports {
     public PrintReports() {
 
         do {
-            enterClassroom();
+            Classroom cr = enterClassroom();
+            crList.add(cr);
             print = KeyboardReader.getPromptedString("Enter Another Classroom? (Yes/No): ");
-        } while (print.equals("yes") || print.equals("YES") || print.equals("Y") || print.equals("y"));
-        report();
+        } while (print.equals("yes") || print.equals("YES") || print.equals("Y") || print.equals("y") || print.equals("Yes"));
+        report(crList);
     }
 
 
-    public void enterClassroom() {
+    public Classroom enterClassroom() {
 
         System.out.println("First You Need To Create A Classroom\n");
 
@@ -53,15 +52,14 @@ public class PrintReports {
         //Enter student details
         do {
             Displayable stu = enterStudent();
-            msg1 = KeyboardReader.getPromptedString("Enter Another Student? (Yes/No):");
+            studentEntryPrompt = KeyboardReader.getPromptedString("Enter Another Student? (Yes/No):");
             stuList.add(stu);
-        } while (msg1.equals("yes") || msg1.equals("YES") || msg1.equals("Y") || msg1.equals("y"));
+        } while (studentEntryPrompt.equals("yes") || studentEntryPrompt.equals("YES") || studentEntryPrompt.equals("Y") || studentEntryPrompt.equals("y") || studentEntryPrompt.equals("Yes"));
 
-        Classroom classRoom = new Classroom(roomNumber, teacher, (Displayable) stuList);
+        Classroom classRoom = new Classroom(roomNumber, teacher, stuList);
+        stuList.clear();
 
-        crList.add(classRoom);
-
-        //return crList;
+        return classRoom;
     }
 
 
@@ -80,9 +78,9 @@ public class PrintReports {
     public Displayable enterStudent() {
 
         System.out.println("Now You Need To Add Students For The Classroom\n");
-        s = new Student();
-        String stufirstName = KeyboardReader.getPromptedString("Enter Student First Name: ");
-        String stulastName = KeyboardReader.getPromptedString("Enter Student Last Name: ");
+        //s = new Student();
+        String stuFirstName = KeyboardReader.getPromptedString("Enter Student First Name: ");
+        String stuLastName = KeyboardReader.getPromptedString("Enter Student Last Name: ");
         try {
             int stuId = KeyboardReader.getPromptedInt("Enter Student ID:");
             {
@@ -90,14 +88,15 @@ public class PrintReports {
                     System.out.println("Student Id must be greater than zero");
                 }
             }
-            int stuGrade = KeyboardReader.getPromptedInt("Enter Student Final Grade:");
-            s.setStudentId(stuId);
-            s.setFinalGrade(stuGrade);
+            String stuGrade = KeyboardReader.getPromptedString("Enter Student Final Grade:");
+            //s.setStudentId(stuId);
+            //s.setFinalGrade(stuGrade);
+            s = new Student (stuId, stuFirstName, stuLastName, stuGrade);
         } catch (NumberFormatException e) {
             System.out.println("Please enter the valid number.");
         }
-        s.setFirstName(stufirstName);
-        s.setLastName(stulastName);
+        //s.setFirstName(stufirstName);
+        //s.setLastName(stulastName);
         stuList.add(s);
         System.out.println("\n");
         return s;
@@ -105,14 +104,19 @@ public class PrintReports {
 
     public void report(ArrayList<Displayable> classRoomList) {
         System.out.println("\n-----------------------------------------\n");
-        for (int i = 0; i < classRoomList.size(); i++)
-            for (Classroom classroom : classRoomList.get(i).getClassroom()) {
-                System.out.println("Room No = " + classroom.display());
-                System.out.println("Teacher Info:");
-                String teacherInfo = classroom.getTeacher().display();
+
+        for (int i = 0; i < classRoomList.size(); i++){
+            Classroom cr = (Classroom) classRoomList.get(i);
+            //Print room number
+            cr.display();
+            //Print teacher details
+            cr.getTeacher().display();
+            //Print student details
+            for (int j = 0; j< cr.getStudents().size(); j++) {
+                Student stu = (Student) cr.getStudents().get(j);
+                stu.display();
             }
-
-
+        }1
         System.out.println("\n-----------------------------------------\n");
     }
 }

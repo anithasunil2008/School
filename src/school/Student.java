@@ -3,7 +3,7 @@ package school;
 public class Student extends Person {
 
     private int studentId;
-    private int finalGrade;
+    private String finalGrade;
     private String firstName;
     private String lastName;
 
@@ -15,15 +15,22 @@ public class Student extends Person {
         return studentId;
     }
 
-    public void setFinalGrade(int finalGrade){
+    public void setFinalGrade(String finalGrade){
         this.finalGrade = finalGrade;
     }
 
-    public int getFinalGrade(){
+    public String getFinalGrade(){
         return finalGrade;
     }
 
     public Student(){
+    }
+
+    public Student(int studentId, String firstName, String lastName, String finalGrade){
+        setStudentId(studentId);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setFinalGrade(finalGrade);
     }
 
     @Override
